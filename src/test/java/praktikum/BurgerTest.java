@@ -2,11 +2,8 @@ package praktikum;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class BurgerTest extends BaseTest {
 
@@ -17,7 +14,7 @@ public class BurgerTest extends BaseTest {
     private static final int EXPECTED_SIZE_AFTER_REMOVE = 0;
 
     @Test
-    public void SetBunsTest() {
+    public void setBunsShouldSetBunCorrectly() {
         when(bunMock.getPrice()).thenReturn(100.0f);
         when(bunMock.getName()).thenReturn("test bun");
 
@@ -27,7 +24,7 @@ public class BurgerTest extends BaseTest {
     }
 
     @Test
-    public void IncreasesSizeAddedIngredientTest() {
+    public void addIngredientShouldIncreaseSize() {
         when(ingredientMock.getPrice()).thenReturn(50.0f);
 
         burger.addIngredient(ingredientMock);
@@ -36,7 +33,7 @@ public class BurgerTest extends BaseTest {
     }
 
     @Test
-    public void ContainsAddedIngredientTest() {
+    public void addIngredientShouldContainIngredient() {
         when(ingredientMock.getPrice()).thenReturn(50.0f);
 
         burger.addIngredient(ingredientMock);
@@ -45,12 +42,12 @@ public class BurgerTest extends BaseTest {
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void RemoveIngredientWithInvalidIndexTest() {
+    public void removeIngredientWithInvalidIndexShouldThrowException() {
         burger.removeIngredient(INVALID_INDEX);
     }
 
     @Test
-    public void RemoveIngredientDecreasesSizeTest() {
+    public void removeIngredientShouldDecreaseSize() {
         when(ingredientMock.getPrice()).thenReturn(50.0f);
         burger.addIngredient(ingredientMock);
 
@@ -60,7 +57,7 @@ public class BurgerTest extends BaseTest {
     }
 
     @Test
-    public void RemoveIngredientRemovesCorrectIngredientTest() {
+    public void removeIngredientShouldRemoveCorrectIngredient() {
         when(ingredientMock.getPrice()).thenReturn(50.0f);
         burger.addIngredient(ingredientMock);
 
@@ -70,28 +67,28 @@ public class BurgerTest extends BaseTest {
     }
 
     @Test
-    public void MoveIngredientMovesIngredientToNewPositionTest() {
-        Ingredient ingredient1 = mock(Ingredient.class);
-        Ingredient ingredient2 = mock(Ingredient.class);
+    public void moveIngredientShouldMoveIngredientToNewPosition() {
+        Ingredient firstIngredient = mock(Ingredient.class);
+        Ingredient secondIngredient = mock(Ingredient.class);
 
-        burger.addIngredient(ingredient1);
-        burger.addIngredient(ingredient2);
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
 
         burger.moveIngredient(FIRST_POSITION, SECOND_POSITION);
 
-        assertEquals(ingredient2, burger.ingredients.get(FIRST_POSITION));
+        assertEquals(secondIngredient, burger.ingredients.get(FIRST_POSITION));
     }
 
     @Test
-    public void MoveIngredientOriginalPositionIsFilledWithOtherIngredientTest() {
-        Ingredient ingredient1 = mock(Ingredient.class);
-        Ingredient ingredient2 = mock(Ingredient.class);
+    public void moveIngredientShouldSwapIngredientsPositions() {
+        Ingredient firstIngredient = mock(Ingredient.class);
+        Ingredient secondIngredient = mock(Ingredient.class);
 
-        burger.addIngredient(ingredient1);
-        burger.addIngredient(ingredient2);
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
 
         burger.moveIngredient(FIRST_POSITION, SECOND_POSITION);
 
-        assertEquals(ingredient1, burger.ingredients.get(SECOND_POSITION));
+        assertEquals(firstIngredient, burger.ingredients.get(SECOND_POSITION));
     }
 }

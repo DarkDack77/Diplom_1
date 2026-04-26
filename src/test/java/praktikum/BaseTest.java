@@ -1,6 +1,5 @@
 package praktikum;
 
-import org.junit.After;
 import org.junit.Before;
 
 import static org.mockito.Mockito.mock;
@@ -16,13 +15,7 @@ public abstract class BaseTest {
         burger = new Burger();
         bunMock = mock(Bun.class);
         ingredientMock = mock(Ingredient.class);
-        burger.setBuns(bunMock);
-    }
 
-    @After
-    public void tearDown() {
-        burger = null;
-        bunMock = null;
-        ingredientMock = null;
+        burger.setBuns(bunMock);
     }
 }
